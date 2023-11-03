@@ -92,29 +92,29 @@ always @(posedge clk)begin
 
  
     if(!rst_n)begin
-        mac_out[0]=0;
-        mac_out[1]=0;
-        mac_out[2]=0;
-        delta = 0;
+        mac_out[0]<=0;
+        mac_out[1]<=0;
+        mac_out[2]<=0;
+        delta <= 0;
     end
     else begin
 
 
-    mac_out[0] = X[0][0][3:0] * W[0][3:0] + X[1][0][3:0] * W[1][3:0];
+    mac_out[0] <= X[0][0][3:0] * W[0][3:0] + X[1][0][3:0] * W[1][3:0];
     activation_out[0] <= mac_out[0] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
     delta <= y_current - activation_out[0];
     W[0] <= W[0] + (delta * X[0][0]);
     W[1] <= W[1] + (delta * X[1][0]);
 
 
-    mac_out[1] = X[0][1][3:0] * W[0][3:0] + X[1][1][3:0] * W[1][3:0];
+    mac_out[1] <= X[0][1][3:0] * W[0][3:0] + X[1][1][3:0] * W[1][3:0];
     activation_out[1] <= mac_out[1] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
     delta <= y_current - activation_out[1];
     W[0] <= W[0] + (delta * X[0][1]);
     W[1] <= W[1] + (delta * X[1][1]);
 
 
-    mac_out[2] = X[0][2][3:0] * W[0][3:0] + X[1][2][3:0] * W[1][3:0];
+    mac_out[2] <= X[0][2][3:0] * W[0][3:0] + X[1][2][3:0] * W[1][3:0];
     activation_out[2] <= mac_out[2] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
     delta <= y_current - activation_out[2];
     W[0] <= W[0] + (delta * X[0][2]);
