@@ -2,8 +2,8 @@
 
 module mac 
 ( 
-    input wire [3:0] x,
-    input wire [3:0] w,
+    input wire [7:0] x,
+    input wire [7:0] w,
     input wire [7:0] previous_out,
     input wire       clk,
     input wire       rst_n, // reset_n - low to reset

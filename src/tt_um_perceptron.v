@@ -24,7 +24,7 @@ reg signed [7:0] activation_out;
 reg signed [7:0] delta;
 
 wire [7:0] partial_mac_out;
-wire [7:0] mac_out;
+reg [7:0] mac_out[inp_n_samples-1:0];
 wire [7:0] y_current;
 
 
@@ -46,8 +46,8 @@ initial begin
     X[1][0]= {4'd0,4'd3};
     X[0][1] = {4'd0,4'd4};
     X[1][1]= {4'd0,4'd5};
-    X[0][2] = {4'd0,4'd4};
-    X[1][2]= {4'd0,4'd5};
+    X[0][2] = {4'd0,4'd1};
+    X[1][2]= {4'd0,4'd2};
 
     Y[0]= 8'd0;
     Y[1]= 8'd1;
@@ -60,45 +60,68 @@ initial begin
 
      
     mac_out_flag = 0;
+    mac_out[0]=0;
 
    
 
 
 end
 
-for (i=0; i<inp_dim; i=i+1) begin
-    for (j=0; j<inp_n_samples; j=j+1) begin
-        mac my_mac_inst (
-            .x(X[i][j][3:0]),
-            .w(W[i][3:0]),
-            .previous_out(partial_mac_out),
-            .clk(clk),
-            .rst_n(rst_n),
-            .out(mac_out)
-        );
-        if(j==inp_n_samples)
-        assign mac_out_flag = 1;
-    end
-    assign partial_mac_out = mac_out;
-    assign y_current = Y[i];
+// for (i=0; i<inp_dim; i=i+1) begin
+//     for (j=0; j<inp_n_samples; j=j+1) begin
+//         mac my_mac_inst (
+//             .x(X[i][j][3:0]),
+//             .w(W[i][3:0]),
+//             .previous_out(partial_mac_out),
+//             .clk(clk),
+//             .rst_n(rst_n),
+//             .out(mac_out)
+//         );
+//         if(j==inp_n_samples-1)
+//         assign mac_out_flag = 1;
+//     end
+//     assign partial_mac_out = mac_out;
+//     assign y_current = Y[i];
    
-    end
+//     end
 
 always @(posedge clk)begin
 
-    if(mac_out_flag) begin
-
-     activation_out <= mac_out > 8'd0 ? 8'd1 : 8'd0;    // stick to perceptron for now
-     delta <= y_current - activation_out;
-
-    for(k=0; k<inp_dim; k=k+1) begin
-        for(l=0; l<inp_n_samples; l=l+1) begin
-            W[k][l] <= W[k][l] + (delta * X[k][l]);
-        end
+ 
+    if(!rst_n)begin
+        mac_out[0]=0;
+        mac_out[1]=0;
+        mac_out[2]=0;
+        delta = 0;
     end
+    else begin
+    mac_out[0] = X[0][0][3:0] * W[0][3:0] + X[1][0][3:0] * W[1][3:0];
+    activation_out[0] <= mac_out[0] > 8'd0 ? 8'd1 : 8'd0;    // stick to perceptron for now
+    delta <= y_current - activation_out[0];
+    W[0] <= W[0] + (delta * X[0][0]);
+    W[1] <= W[1] + (delta * X[1][0]);
 
-    mac_out_flag = 0;
-    $display("%b %b %b",activation_out, y_current, delta);
+
+    mac_out[1] = X[0][1][3:0] * W[0][3:0] + X[1][1][3:0] * W[1][3:0];
+    activation_out[1] <= mac_out[1] > 8'd0 ? 8'd1 : 8'd0;    // stick to perceptron for now
+    delta <= y_current - activation_out[1];
+    $display("Delta2:%d",delta);
+    W[0] <= W[0] + (delta * X[0][1]);
+    W[1] <= W[1] + (delta * X[1][1]);
+
+
+    mac_out[2] = X[0][2][3:0] * W[0][3:0] + X[1][2][3:0] * W[1][3:0];
+    activation_out[2] <= mac_out[2] > 8'd0 ? 8'd1 : 8'd0;    // stick to perceptron for now
+    delta <= y_current - activation_out[2];
+    $display("Delta3:%d",delta);
+    W[0] <= W[0] + (delta * X[0][2]);
+    W[1] <= W[1] + (delta * X[1][2]);
+
+
+    $display("Out_1 X[0][0]:%d W[0]:%d X[1][0]:%d W[1]:%d M[0]%d",X[0][0][3:0] , W[0][3:0] , X[1][0][3:0] ,W[1][3:0], mac_out[0]);
+    $display("Out_2 X[0][1]:%d W[0]:%d X[1][1]:%d W[1]:%d M[0]%d",X[0][1][3:0] , W[0][3:0] , X[1][1][3:0] ,W[1][3:0], mac_out[1]);
+    $display("Out_3 X[0][2]:%d W[0]:%d X[1][2]:%d W[1]:%d M[0]%d",X[0][2][3:0] , W[0][3:0] , X[1][2][3:0] ,W[1][3:0], mac_out[2]);
+
     end
 end
 
