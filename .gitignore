@@ -1,7 +1,6 @@
 .DS_Store
 .idea
 .vscode
-*.vcd
 runs
 src/sim_build
 src/__pycache__/
