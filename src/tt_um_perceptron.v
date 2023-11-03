@@ -20,7 +20,7 @@ reg [7:0] X [inp_dim-1:0][inp_n_samples-1:0]; // [dimnension of data][no. of sam
 reg signed [7:0] W [inp_dim-1:0];
 reg signed [7:0] Y[inp_n_samples-1:0];
 reg signed [7:0] z1;
-reg signed [7:0] activation_out;
+reg signed [7:0] activation_out[inp_n_samples-1:0];
 reg signed [7:0] delta;
 
 wire [7:0] partial_mac_out;
@@ -55,8 +55,11 @@ initial begin
 
 
     z1 = 8'd0;
-    activation_out = 8'd0;
+    activation_out[0] = 0;
+    activation_out[1] = 0;
+    activation_out[2] = 0;
     delta = 8'd0;
+    
 
      
     mac_out_flag = 0;
@@ -126,7 +129,7 @@ always @(posedge clk)begin
 end
 
 
-assign  uo_out = activation_out;
+assign  uo_out = activation_out[2];
 
 
 endmodule
