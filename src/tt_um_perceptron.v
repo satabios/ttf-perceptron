@@ -35,8 +35,6 @@ initial begin
 
     W[0]= {4'd0,4'd4};
     W[1]= {4'd0,4'd9};
-    Y[0]= 8'd0;
-    Y[1]= 8'd1;
 
 
 
@@ -47,6 +45,10 @@ initial begin
     X[0][2] = {4'd0,4'd4};
     X[1][2]= {4'd0,4'd5};
 
+    Y[0]= 8'd0;
+    Y[1]= 8'd1;
+    Y[2]= 8'd1;
+
 
     z1 = 8'd0;
     activation_out = 8'd0;
@@ -56,8 +58,8 @@ initial begin
 
 end
 
-for (  i=0; i<3; i=i+1) begin
-    for ( j=0; j<3; j=j+1) begin
+for (i=0; i<3; i=i+1) begin
+    for (j=0; j<3; j=j+1) begin
         mac my_mac_inst (
             .x(X[i][j][3:0]),
             .w(W[i][3:0]),
@@ -72,12 +74,7 @@ for (  i=0; i<3; i=i+1) begin
 
     end
 
-
-
-
 always @(posedge clk)begin
-
-
 
      activation_out <= mac_out > 8'd0 ? 8'd1 : 8'd0;    // stick to perceptron for now
      delta <= y_current - activation_out;
@@ -87,12 +84,9 @@ always @(posedge clk)begin
             W[k][l] <= W[k][l] + delta * X[k][l];
         end
     end
-    
 
      $display("%b %b %b",activation_out, y_current, delta);
 end 
-
-
 
 assign  uo_out = activation_out;
 
