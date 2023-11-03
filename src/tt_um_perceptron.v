@@ -24,11 +24,12 @@ wire [7:0] partial_mac_out;
 wire [7:0] mac_out;
 wire [7:0] y_current;
 
+
 genvar i;
 genvar j;
 
 integer k,l;
-
+integer mac_out_flag;
 
 
 initial begin
@@ -53,6 +54,10 @@ initial begin
     z1 = 8'd0;
     activation_out = 8'd0;
     delta = 8'd0;
+
+     
+    mac_out_flag = 0;
+
    
 
 
@@ -68,13 +73,17 @@ for (i=0; i<3; i=i+1) begin
             .rst_n(rst_n),
             .out(mac_out)
         );
+        if(j==3)
+        assign mac_out_flag = 1;
     end
     assign partial_mac_out = mac_out;
     assign y_current = Y[i];
-
+   
     end
 
 always @(posedge clk)begin
+
+    if(mac_out_flag) begin
 
      activation_out <= mac_out > 8'd0 ? 8'd1 : 8'd0;    // stick to perceptron for now
      delta <= y_current - activation_out;
@@ -85,8 +94,12 @@ always @(posedge clk)begin
         end
     end
 
-     $display("%b %b %b",activation_out, y_current, delta);
-end 
+    
+    mac_out_flag = 0;
+    $display("%b %b %b",activation_out, y_current, delta);
+    end
+end
+
 
 assign  uo_out = activation_out;
 
