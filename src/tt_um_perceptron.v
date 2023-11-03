@@ -29,7 +29,7 @@ reg [7:0] mac_out[inp_n_samples-1:0];
 
 
 
-// integer i;
+integer i;
 // integer mac_out_flag;
 
 
@@ -96,30 +96,31 @@ always @(posedge clk)begin
     else begin
 
 
-    mac_out[0] <= X[0][0][3:0] * W[0][3:0] + X[1][0][3:0] * W[1][3:0];
-    activation_out[0] <= mac_out[0] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
-    delta <= Y[0] - activation_out[0];
-    W[0] <= W[0] + (delta * X[0][0]);
-    W[1] <= W[1] + (delta * X[1][0]);
+   for(i=0;i<inp_n_samples;i=i+1)begin
+    mac_out[i] <= X[0][i][3:0] * W[0][3:0] + X[1][i][3:0] * W[1][3:0];
+    activation_out[i] <= mac_out[i] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
+    delta <= Y[i] - activation_out[i];
+    W[0] <= W[0] + (delta * X[0][i]);
+    W[1] <= W[1] + (delta * X[1][i]);
+
+   end
 
 
-    mac_out[1] <= X[0][1][3:0] * W[0][3:0] + X[1][1][3:0] * W[1][3:0];
-    activation_out[1] <= mac_out[1] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
-    delta <= Y[1] - activation_out[1];
-    W[0] <= W[0] + (delta * X[0][1]);
-    W[1] <= W[1] + (delta * X[1][1]);
+    // mac_out[1] <= X[0][1][3:0] * W[0][3:0] + X[1][1][3:0] * W[1][3:0];
+    // activation_out[1] <= mac_out[1] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
+    // delta <= Y[1] - activation_out[1];
+    // W[0] <= W[0] + (delta * X[0][1]);
+    // W[1] <= W[1] + (delta * X[1][1]);
 
 
-    mac_out[2] <= X[0][2][3:0] * W[0][3:0] + X[1][2][3:0] * W[1][3:0];
-    activation_out[2] <= mac_out[2] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
-    delta <= Y[2] - activation_out[2];
-    W[0] <= W[0] + (delta * X[0][2]);
-    W[1] <= W[1] + (delta * X[1][2]);
+    // mac_out[2] <= X[0][2][3:0] * W[0][3:0] + X[1][2][3:0] * W[1][3:0];
+    // activation_out[2] <= mac_out[2] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
+    // delta <= Y[2] - activation_out[2];
+    // W[0] <= W[0] + (delta * X[0][2]);
+    // W[1] <= W[1] + (delta * X[1][2]);
 
 
-    $display("Out_1 X[0][0]:%d W[0]:%d X[1][0]:%d W[1]:%d M[0]%d",X[0][0][3:0] , W[0][3:0] , X[1][0][3:0] ,W[1][3:0], mac_out[0]);
-    $display("Out_2 X[0][1]:%d W[0]:%d X[1][1]:%d W[1]:%d M[0]%d",X[0][1][3:0] , W[0][3:0] , X[1][1][3:0] ,W[1][3:0], mac_out[1]);
-    $display("Out_3 X[0][2]:%d W[0]:%d X[1][2]:%d W[1]:%d M[0]%d",X[0][2][3:0] , W[0][3:0] , X[1][2][3:0] ,W[1][3:0], mac_out[2]);
+
 
     end
 end
