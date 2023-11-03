@@ -1,6 +1,8 @@
 `default_nettype none
 
-module tt_um_perceptron #( parameter MAX_COUNT = 24'd10_000_000 ) (
+module tt_um_perceptron #( parameter inp_n_samples = 3,
+                           parameter inp_dim = 2,
+                           parameter out_dim = 1 ) (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
     output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
     input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
@@ -13,11 +15,11 @@ module tt_um_perceptron #( parameter MAX_COUNT = 24'd10_000_000 ) (
 
   
 
-reg [7:0] X [1:0][2:0]; // [dimnension of data][no. of samples]
-reg signed [7:0] W [1:0];
-reg signed [7:0] Y[2:0];
-reg [7:0] z1;
-reg [7:0] activation_out;
+reg [7:0] X [inp_dim-1:0][inp_n_samples-1:0]; // [dimnension of data][no. of samples]
+reg signed [7:0] W [inp_dim-1:0];
+reg signed [7:0] Y[inp_n_samples-1:0];
+reg signed [7:0] z1;
+reg signed [7:0] activation_out;
 reg signed [7:0] delta;
 
 wire [7:0] partial_mac_out;
@@ -63,8 +65,8 @@ initial begin
 
 end
 
-for (i=0; i<3; i=i+1) begin
-    for (j=0; j<3; j=j+1) begin
+for (i=0; i<inp_dim; i=i+1) begin
+    for (j=0; j<inp_n_samples; j=j+1) begin
         mac my_mac_inst (
             .x(X[i][j][3:0]),
             .w(W[i][3:0]),
@@ -88,13 +90,12 @@ always @(posedge clk)begin
      activation_out <= mac_out > 8'd0 ? 8'd1 : 8'd0;    // stick to perceptron for now
      delta <= y_current - activation_out;
 
-    for(k =0 ;k <2;k=k+1) begin
-        for(l=0;l<2;l=l+1) begin
-            W[k][l] <= W[k][l] + delta * X[k][l];
+    for(k=0; k<inp_dim; k=k+1) begin
+        for(l=0; l<inp_n_samples; l=l+1) begin
+            W[k][l] <= W[k][l] + (delta * X[k][l]);
         end
     end
 
-    
     mac_out_flag = 0;
     $display("%b %b %b",activation_out, y_current, delta);
     end

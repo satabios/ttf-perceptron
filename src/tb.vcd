@@ -1,5 +1,5 @@
 $date
-	Fri Nov  3 16:32:00 2023
+	Fri Nov  3 16:48:49 2023
 $end
 $version
 	Icarus Verilog
@@ -29,136 +29,96 @@ $var wire 8 . uio_oe [7:0] $end
 $var wire 8 / uio_out [7:0] $end
 $var wire 8 0 uo_out [7:0] $end
 $var wire 8 1 y_current [7:0] $end
-$var parameter 24 2 MAX_COUNT $end
-$var reg 8 3 activation_out [7:0] $end
-$var reg 8 4 delta [7:0] $end
-$var reg 8 5 z1 [7:0] $end
-$var integer 32 6 k [31:0] $end
-$var integer 32 7 l [31:0] $end
-$var integer 32 8 mac_out_flag [31:0] $end
+$var parameter 32 2 inp_dim $end
+$var parameter 32 3 inp_n_samples $end
+$var parameter 32 4 out_dim $end
+$var reg 8 5 activation_out [7:0] $end
+$var reg 8 6 delta [7:0] $end
+$var reg 8 7 z1 [7:0] $end
+$var integer 32 8 k [31:0] $end
+$var integer 32 9 l [31:0] $end
+$var integer 32 : mac_out_flag [31:0] $end
 $scope begin genblk1[0] $end
-$var parameter 2 9 i $end
+$var parameter 2 ; i $end
 $scope begin genblk1[0] $end
-$var parameter 2 : j $end
+$var parameter 2 < j $end
 $scope module my_mac_inst $end
 $var wire 1 % clk $end
-$var wire 8 ; previous_out [7:0] $end
+$var wire 8 = previous_out [7:0] $end
 $var wire 1 ' rst_n $end
-$var wire 4 < w [3:0] $end
-$var wire 4 = x [3:0] $end
-$var reg 8 > accumulation_out [7:0] $end
-$var reg 8 ? multiplier_output [7:0] $end
-$var reg 8 @ out [7:0] $end
+$var wire 4 > w [3:0] $end
+$var wire 4 ? x [3:0] $end
+$var reg 8 @ accumulation_out [7:0] $end
+$var reg 8 A multiplier_output [7:0] $end
+$var reg 8 B out [7:0] $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[1] $end
-$var parameter 2 A j $end
+$var parameter 2 C j $end
 $scope module my_mac_inst $end
 $var wire 1 % clk $end
-$var wire 8 B previous_out [7:0] $end
+$var wire 8 D previous_out [7:0] $end
 $var wire 1 ' rst_n $end
-$var wire 4 C w [3:0] $end
-$var wire 4 D x [3:0] $end
-$var reg 8 E accumulation_out [7:0] $end
-$var reg 8 F multiplier_output [7:0] $end
-$var reg 8 G out [7:0] $end
+$var wire 4 E w [3:0] $end
+$var wire 4 F x [3:0] $end
+$var reg 8 G accumulation_out [7:0] $end
+$var reg 8 H multiplier_output [7:0] $end
+$var reg 8 I out [7:0] $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[2] $end
-$var parameter 3 H j $end
+$var parameter 3 J j $end
 $scope module my_mac_inst $end
 $var wire 1 % clk $end
-$var wire 8 I previous_out [7:0] $end
+$var wire 8 K previous_out [7:0] $end
 $var wire 1 ' rst_n $end
-$var wire 4 J w [3:0] $end
-$var wire 4 K x [3:0] $end
-$var reg 8 L accumulation_out [7:0] $end
-$var reg 8 M multiplier_output [7:0] $end
-$var reg 8 N out [7:0] $end
+$var wire 4 L w [3:0] $end
+$var wire 4 M x [3:0] $end
+$var reg 8 N accumulation_out [7:0] $end
+$var reg 8 O multiplier_output [7:0] $end
+$var reg 8 P out [7:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[1] $end
-$var parameter 2 O i $end
+$var parameter 2 Q i $end
 $scope begin genblk1[0] $end
-$var parameter 2 P j $end
+$var parameter 2 R j $end
 $scope module my_mac_inst $end
 $var wire 1 % clk $end
-$var wire 8 Q previous_out [7:0] $end
+$var wire 8 S previous_out [7:0] $end
 $var wire 1 ' rst_n $end
-$var wire 4 R w [3:0] $end
-$var wire 4 S x [3:0] $end
-$var reg 8 T accumulation_out [7:0] $end
-$var reg 8 U multiplier_output [7:0] $end
-$var reg 8 V out [7:0] $end
+$var wire 4 T w [3:0] $end
+$var wire 4 U x [3:0] $end
+$var reg 8 V accumulation_out [7:0] $end
+$var reg 8 W multiplier_output [7:0] $end
+$var reg 8 X out [7:0] $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[1] $end
-$var parameter 2 W j $end
+$var parameter 2 Y j $end
 $scope module my_mac_inst $end
 $var wire 1 % clk $end
-$var wire 8 X previous_out [7:0] $end
+$var wire 8 Z previous_out [7:0] $end
 $var wire 1 ' rst_n $end
-$var wire 4 Y w [3:0] $end
-$var wire 4 Z x [3:0] $end
-$var reg 8 [ accumulation_out [7:0] $end
-$var reg 8 \ multiplier_output [7:0] $end
-$var reg 8 ] out [7:0] $end
+$var wire 4 [ w [3:0] $end
+$var wire 4 \ x [3:0] $end
+$var reg 8 ] accumulation_out [7:0] $end
+$var reg 8 ^ multiplier_output [7:0] $end
+$var reg 8 _ out [7:0] $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[2] $end
-$var parameter 3 ^ j $end
+$var parameter 3 ` j $end
 $scope module my_mac_inst $end
 $var wire 1 % clk $end
-$var wire 8 _ previous_out [7:0] $end
+$var wire 8 a previous_out [7:0] $end
 $var wire 1 ' rst_n $end
-$var wire 4 ` w [3:0] $end
-$var wire 4 a x [3:0] $end
-$var reg 8 b accumulation_out [7:0] $end
-$var reg 8 c multiplier_output [7:0] $end
-$var reg 8 d out [7:0] $end
-$upscope $end
-$upscope $end
-$upscope $end
-$scope begin genblk1[2] $end
-$var parameter 3 e i $end
-$scope begin genblk1[0] $end
-$var parameter 2 f j $end
-$scope module my_mac_inst $end
-$var wire 1 % clk $end
-$var wire 8 g previous_out [7:0] $end
-$var wire 1 ' rst_n $end
-$var wire 4 h w [3:0] $end
-$var wire 4 i x [3:0] $end
-$var reg 8 j accumulation_out [7:0] $end
-$var reg 8 k multiplier_output [7:0] $end
-$var reg 8 l out [7:0] $end
-$upscope $end
-$upscope $end
-$scope begin genblk1[1] $end
-$var parameter 2 m j $end
-$scope module my_mac_inst $end
-$var wire 1 % clk $end
-$var wire 8 n previous_out [7:0] $end
-$var wire 1 ' rst_n $end
-$var wire 4 o w [3:0] $end
-$var wire 4 p x [3:0] $end
-$var reg 8 q accumulation_out [7:0] $end
-$var reg 8 r multiplier_output [7:0] $end
-$var reg 8 s out [7:0] $end
-$upscope $end
-$upscope $end
-$scope begin genblk1[2] $end
-$var parameter 3 t j $end
-$scope module my_mac_inst $end
-$var wire 1 % clk $end
-$var wire 8 u previous_out [7:0] $end
-$var wire 1 ' rst_n $end
-$var wire 4 v w [3:0] $end
-$var wire 4 w x [3:0] $end
-$var reg 8 x accumulation_out [7:0] $end
-$var reg 8 y multiplier_output [7:0] $end
-$var reg 8 z out [7:0] $end
+$var wire 4 b w [3:0] $end
+$var wire 4 c x [3:0] $end
+$var reg 8 d accumulation_out [7:0] $end
+$var reg 8 e multiplier_output [7:0] $end
+$var reg 8 f out [7:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
@@ -167,82 +127,62 @@ $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
 $dumpall
-b10 t
-b1 m
-b0 f
-b10 e
-b10 ^
-b1 W
-b0 P
-b1 O
-b10 H
-b1 A
-b0 :
-b0 9
-b100110001001011010000000 2
+b10 `
+b1 Y
+b0 R
+b1 Q
+b10 J
+b1 C
+b0 <
+b0 ;
+b1 4
+b11 3
+b10 2
 $end
 #0
 $dumpvars
-bx z
-bx y
-bx x
-bx w
-bx v
-bx u
-bx s
-bx r
-bx q
-bx p
-bx o
-bx n
-bx l
-bx k
-bx j
-bx i
-bx h
-bx g
+bx f
+b101101 e
 bx d
-b101101 c
-bx b
-b101 a
-b1001 `
+b101 c
+b1001 b
+bx a
 bx _
+b101101 ^
 bx ]
-b101101 \
-bx [
-b101 Z
-b1001 Y
+b101 \
+b1001 [
+bx Z
 bx X
+b11011 W
 bx V
-b11011 U
-bx T
-b11 S
-b1001 R
-bx Q
+b11 U
+b1001 T
+bx S
+bx P
+b10000 O
 bx N
-b10000 M
-bx L
-b100 K
-b100 J
+b100 M
+b100 L
+bx K
 bx I
+b10000 H
 bx G
-b10000 F
-bx E
-b100 D
-b100 C
+b100 F
+b100 E
+bx D
 bx B
+b1000 A
 bx @
-b1000 ?
-bx >
-b10 =
-b100 <
-bx ;
-b0 8
-bx 7
-bx 6
+b10 ?
+b100 >
+bx =
+b0 :
+bx 9
+bx 8
+b0 7
+b0 6
 b0 5
-b0 4
-b0 3
 b0x 1
 b0 0
 bz /
