@@ -1,6 +1,6 @@
 `default_nettype none
 
-module tt_um_perceptron #( parameter inp_n_samples = 3,
+module tt_um_perceptron #( parameter n_samples = 3,
                            parameter inp_dim = 2
                            ) (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
@@ -13,18 +13,18 @@ module tt_um_perceptron #( parameter inp_n_samples = 3,
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  
+  //This copy works
 assign uio_oe = 8'b11111111;
 assign uio_out = 8'b00000000;
-reg [7:0] X [inp_dim-1:0][inp_n_samples-1:0]; // [dimnension of data][no. of samples]
+reg [7:0] X [inp_dim-1:0][n_samples-1:0]; // [dimnension of data][no. of samples]
 reg signed [7:0] W [inp_dim-1:0];
-reg signed [7:0] Y [inp_n_samples-1:0];
+reg signed [7:0] Y [n_samples-1:0];
 // reg signed [7:0] z1;
-reg signed [7:0] activation_out[inp_n_samples-1:0];
+reg signed [7:0] activation_out[n_samples-1:0];
 reg signed [7:0] delta;
 
 // wire [7:0] partial_mac_out;
-reg [7:0] mac_out[inp_n_samples-1:0];
+reg [7:0] mac_out[n_samples-1:0];
 // wire [7:0] y_current;
 
 
@@ -67,7 +67,7 @@ initial begin
 end
 
 // for (i=0; i<inp_dim; i=i+1) begin
-//     for (j=0; j<inp_n_samples; j=j+1) begin
+//     for (j=0; j<n_samples; j=j+1) begin
 //         mac my_mac_inst (
 //             .x(X[i][j][3:0]),
 //             .w(W[i][3:0]),
@@ -76,7 +76,7 @@ end
 //             .rst_n(rst_n),
 //             .out(mac_out)
 //         );
-//         if(j==inp_n_samples-1)
+//         if(j==n_samples-1)
 //         assign mac_out_flag = 1;
 //     end
 //     assign partial_mac_out = mac_out;
@@ -96,7 +96,7 @@ always @(posedge clk)begin
     else begin
 
 
-   for(i=0;i<inp_n_samples;i=i+1)begin
+   for(i=0;i<n_samples;i=i+1)begin
     mac_out[i] <= X[0][i][3:0] * W[0][3:0] + X[1][i][3:0] * W[1][3:0];
     activation_out[i] <= mac_out[i] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
     delta <= Y[i] - activation_out[i];
@@ -126,7 +126,7 @@ always @(posedge clk)begin
 end
 
 
-assign  uo_out = activation_out[inp_n_samples-1];
+assign  uo_out = activation_out[n_samples-1];
 
 
 endmodule
