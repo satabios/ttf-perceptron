@@ -69,7 +69,7 @@ for (i=0; i<inp_dim; i=i+1) begin
     for (j=0; j<inp_n_samples; j=j+1) begin
         mac my_mac_inst (
             .x(X[i][j][3:0]),
-            .w(W[i][3:0]),
+            .w(W[i]),
             .previous_out(partial_mac_out),
             .clk(clk),
             .rst_n(rst_n),
