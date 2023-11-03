@@ -14,7 +14,8 @@ module tt_um_perceptron #( parameter inp_n_samples = 3,
 );
 
   
-
+assign uio_oe = 8'b11111111;
+assign uio_out = 8'b00000000;
 reg [7:0] X [inp_dim-1:0][inp_n_samples-1:0]; // [dimnension of data][no. of samples]
 reg signed [7:0] W [inp_dim-1:0];
 reg signed [7:0] Y[inp_n_samples-1:0];
@@ -75,7 +76,7 @@ for (i=0; i<inp_dim; i=i+1) begin
             .rst_n(rst_n),
             .out(mac_out)
         );
-        if(j==3)
+        if(j==inp_n_samples)
         assign mac_out_flag = 1;
     end
     assign partial_mac_out = mac_out;
