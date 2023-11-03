@@ -1,5 +1,5 @@
 $date
-	Fri Nov  3 22:30:23 2023
+	Fri Nov  3 22:36:05 2023
 $end
 $version
 	Icarus Verilog
@@ -28,24 +28,18 @@ $var wire 8 - uo_out [7:0] $end
 $var wire 8 . y_current [7:0] $end
 $var parameter 32 / inp_dim $end
 $var parameter 32 0 inp_n_samples $end
-$var parameter 32 1 out_dim $end
-$var reg 8 2 delta [7:0] $end
-$var reg 8 3 z1 [7:0] $end
-$var integer 32 4 mac_out_flag [31:0] $end
+$var reg 8 1 delta [7:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 $comment Show the parameter values. $end
 $dumpall
-b1 1
 b11 0
 b10 /
 $end
 #0
 $dumpvars
-b0 4
-b0 3
-bx 2
+bx 1
 bz .
 bx -
 b0 ,
@@ -105,7 +99,7 @@ bx -
 #950000000
 0$
 #1000000000
-b0 2
+b0 1
 1$
 #1050000000
 0$
@@ -149,7 +143,7 @@ b0 2
 #2000000000
 b0 #
 b0 -
-bx 2
+bx 1
 1$
 #2050000000
 0$

@@ -1,8 +1,8 @@
 `default_nettype none
 
 module tt_um_perceptron #( parameter inp_n_samples = 3,
-                           parameter inp_dim = 2,
-                           parameter out_dim = 1 ) (
+                           parameter inp_dim = 2
+                           ) (
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
     output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
     input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
@@ -19,20 +19,18 @@ assign uio_out = 8'b00000000;
 reg [7:0] X [inp_dim-1:0][inp_n_samples-1:0]; // [dimnension of data][no. of samples]
 reg signed [7:0] W [inp_dim-1:0];
 reg signed [7:0] Y[inp_n_samples-1:0];
-reg signed [7:0] z1;
+// reg signed [7:0] z1;
 reg signed [7:0] activation_out[inp_n_samples-1:0];
 reg signed [7:0] delta;
 
-wire [7:0] partial_mac_out;
+// wire [7:0] partial_mac_out;
 reg [7:0] mac_out[inp_n_samples-1:0];
 wire [7:0] y_current;
 
 
-genvar i;
-genvar j;
 
-integer k,l;
-integer mac_out_flag;
+integer i;
+// integer mac_out_flag;
 
 
 initial begin
@@ -53,8 +51,6 @@ initial begin
     Y[1]= 8'd1;
     Y[2]= 8'd1;
 
-
-    z1 = 8'd0;
     activation_out[0] = 0;
     activation_out[1] = 0;
     activation_out[2] = 0;
@@ -62,7 +58,7 @@ initial begin
     
 
      
-    mac_out_flag = 0;
+   
     mac_out[0]=0;
 
    
@@ -129,7 +125,7 @@ always @(posedge clk)begin
 end
 
 
-assign  uo_out = activation_out[2];
+assign  uo_out = activation_out[inp_n_samples-1];
 
 
 endmodule
