@@ -16,21 +16,20 @@ module tt_um_perceptron #( parameter n_samples = 3,
   //This copy works
 assign uio_oe = 8'b11111111;
 assign uio_out = 8'b00000000;
+
+
 reg [7:0] X [inp_dim-1:0][n_samples-1:0]; // [dimnension of data][no. of samples]
 reg signed [7:0] W [inp_dim-1:0];
 reg signed [7:0] Y [n_samples-1:0];
-// reg signed [7:0] z1;
 reg signed [7:0] activation_out[n_samples-1:0];
 reg signed [7:0] delta;
-
-// wire [7:0] partial_mac_out;
 reg [7:0] mac_out[n_samples-1:0];
-// wire [7:0] y_current;
+
 
 
 
 integer i;
-// integer mac_out_flag;
+
 
 
 initial begin
@@ -66,23 +65,6 @@ initial begin
 
 end
 
-// for (i=0; i<inp_dim; i=i+1) begin
-//     for (j=0; j<n_samples; j=j+1) begin
-//         mac my_mac_inst (
-//             .x(X[i][j][3:0]),
-//             .w(W[i][3:0]),
-//             .previous_out(partial_mac_out),
-//             .clk(clk),
-//             .rst_n(rst_n),
-//             .out(mac_out)
-//         );
-//         if(j==n_samples-1)
-//         assign mac_out_flag = 1;
-//     end
-//     assign partial_mac_out = mac_out;
-//     assign y_current = Y[i];
-   
-//     end
 
 always @(posedge clk)begin
 
@@ -104,23 +86,6 @@ always @(posedge clk)begin
     W[1] <= W[1] + (delta * X[1][i]);
 
    end
-
-
-    // mac_out[1] <= X[0][1][3:0] * W[0][3:0] + X[1][1][3:0] * W[1][3:0];
-    // activation_out[1] <= mac_out[1] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
-    // delta <= Y[1] - activation_out[1];
-    // W[0] <= W[0] + (delta * X[0][1]);
-    // W[1] <= W[1] + (delta * X[1][1]);
-
-
-    // mac_out[2] <= X[0][2][3:0] * W[0][3:0] + X[1][2][3:0] * W[1][3:0];
-    // activation_out[2] <= mac_out[2] > 8'b00000000 ? 8'b11111111 : 8'b00000000;    // stick to perceptron for now
-    // delta <= Y[2] - activation_out[2];
-    // W[0] <= W[0] + (delta * X[0][2]);
-    // W[1] <= W[1] + (delta * X[1][2]);
-
-
-
 
     end
 end
