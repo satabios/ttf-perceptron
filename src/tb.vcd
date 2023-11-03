@@ -1,5 +1,5 @@
 $date
-	Fri Nov  3 16:48:49 2023
+	Fri Nov  3 16:51:32 2023
 $end
 $version
 	Icarus Verilog
@@ -141,42 +141,42 @@ b10 2
 $end
 #0
 $dumpvars
-bx f
-b101101 e
+b0 f
+bx e
 bx d
 b101 c
 b1001 b
-bx a
-bx _
-b101101 ^
+b0 a
+b0 _
+bx ^
 bx ]
 b101 \
 b1001 [
-bx Z
-bx X
-b11011 W
+b0 Z
+b0 X
+bx W
 bx V
 b11 U
 b1001 T
-bx S
-bx P
-b10000 O
+b0 S
+b0 P
+bx O
 bx N
 b100 M
 b100 L
-bx K
-bx I
-b10000 H
+b0 K
+b0 I
+bx H
 bx G
 b100 F
 b100 E
-bx D
-bx B
-b1000 A
+b0 D
+b0 B
+bx A
 bx @
 b10 ?
 b100 >
-bx =
+b0 =
 b0 :
 bx 9
 bx 8
@@ -188,12 +188,12 @@ b0 0
 bz /
 bz .
 bx -
-b0 ,
-bx +
-bx *
+bx ,
+b0 +
+b0 *
 bx )
-b0 (
-1'
+bx (
+0'
 x&
 1%
 b0 $
@@ -596,10 +596,31 @@ $end
 #985000000
 0%
 #990000000
+1'
 1%
 #995000000
 0%
 #1000000000
+bx B
+b1000 A
+bx I
+b10000 H
+bx P
+b10000 O
+bx X
+b11011 W
+bx _
+b101101 ^
+bx +
+bx =
+bx D
+bx K
+bx S
+bx Z
+bx a
+bx *
+bx f
+b101101 e
 1%
 #1005000000
 0%
