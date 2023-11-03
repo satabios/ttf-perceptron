@@ -15,9 +15,12 @@ async def test_perceptron(dut):
     dut._log.info("reset")
     dut.rst_n.value = 1
     # set the compare value
+    await ClockCycles(dut.clk, 100)
     dut.rst_n.value = 0
     await ClockCycles(dut.clk, 100)
     dut.rst_n.value = 1
     await ClockCycles(dut.clk, 100)
     dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 100)
+    dut.rst_n.value = 1
 
