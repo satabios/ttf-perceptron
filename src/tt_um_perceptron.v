@@ -14,8 +14,8 @@ module tt_um_perceptron #( parameter inp_n_samples = 3,
 );
 
   
-// assign uio_oe = 8'b11111111;
-// assign uio_out = 8'b00000000;
+assign uio_oe = 8'b11111111;
+assign uio_out = 8'b00000000;
 reg [7:0] X [inp_dim-1:0][inp_n_samples-1:0]; // [dimnension of data][no. of samples]
 reg signed [7:0] W [inp_dim-1:0];
 reg signed [7:0] Y [inp_n_samples-1:0];
@@ -25,7 +25,7 @@ reg signed [7:0] delta;
 
 // wire [7:0] partial_mac_out;
 reg [7:0] mac_out[inp_n_samples-1:0];
-wire [7:0] y_current;
+// wire [7:0] y_current;
 
 
 
