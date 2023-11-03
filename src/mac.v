@@ -18,10 +18,12 @@ module mac
         end else begin
             multiplier_output <= x * w;
             accumulation_out <= multiplier_output + previous_out;
+            out <= accumulation_out;
         end
-    end
+   
 
     
-    assign out = accumulation_out;
+   
+     end
 
 endmodule
