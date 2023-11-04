@@ -70,9 +70,11 @@ always @(posedge clk)begin
 
  
     if(!rst_n)begin
-        mac_out[0]<=0;
-        mac_out[1]<=0;
-        mac_out[2]<=0;
+        for(i=0;i<n_samples;i=i+1)begin
+            mac_out[i] <= 0;
+            activation_out[i] <= 0;
+        end
+  
         delta <= 0;
     end
     else begin
