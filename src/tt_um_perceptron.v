@@ -37,8 +37,6 @@ initial begin
     W[0]= {4'd0,4'd4};
     W[1]= {4'd0,4'd9};
 
-
-
     X[0][0] = {4'd0,4'd2};
     X[1][0]= {4'd0,4'd3};
     X[0][1] = {4'd0,4'd4};
@@ -54,14 +52,7 @@ initial begin
     activation_out[1] = 0;
     activation_out[2] = 0;
     delta = 8'd0;
-    
-
-     
-   
     mac_out[0]=0;
-
-   
-
 
 end
 
